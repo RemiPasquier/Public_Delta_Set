@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH -t 00:30:00
+#SBATCH --ntasks-per-node=12
+#SBATCH -N 4
+#SBATCH -J "VASPNe"
+#SBATCH -D ./
+#SBATCH --account=pn36zo
+#SBATCH --partition=test
+
+#module purge
+module unload intel-oneapi-compilers
+module unload intel-mkl
+
+module load slurm_setup
+module load vasp/6.4.3
+
+#export OMP_NUM_THREADS=4
+#export I_MPI_PIN_CELL=core
+#export I_MPI_PIN_DOMAIN=omp:compact
+
+vasp6 -n $SLURM_NTASKS -s std

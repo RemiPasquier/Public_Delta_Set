@@ -1,0 +1,1338 @@
+ DBCSR| CPU Multiplication driver                                           BLAS (U)
+ DBCSR| Multrec recursion limit                                              512 (U)
+ DBCSR| Multiplication stack size                                           1000 (D)
+ DBCSR| Maximum elements for images                                    UNLIMITED (U)
+ DBCSR| Multiplicative factor virtual images                                   1 (U)
+ DBCSR| Use multiplication densification                                       T (D)
+ DBCSR| Multiplication size stacks                                             3 (U)
+ DBCSR| Use memory pool for CPU allocation                                     F (U)
+ DBCSR| Number of 3D layers                                               SINGLE (U)
+ DBCSR| Use MPI memory allocation                                              F (U)
+ DBCSR| Use RMA algorithm                                                      F (U)
+ DBCSR| Use Communication thread                                               T (U)
+ DBCSR| Communication thread load                                             45 (D)
+ DBCSR| MPI: My process id                                                     0
+ DBCSR| MPI: Number of processes                                               8
+ DBCSR| OMP: Current number of threads                                        12
+ DBCSR| OMP: Max number of threads                                            12
+ DBCSR| Split modifier for TAS multiplication algorithm                  1.0E+00 (U)
+
+
+  **** **** ******  **  PROGRAM STARTED AT               2025-08-04 03:21:16.403
+ ***** ** ***  *** **   PROGRAM STARTED ON                          i04r11c03s08
+ **    ****   ******    PROGRAM STARTED BY                               di38fab
+ ***** **    ** ** **   PROGRAM PROCESS ID                               3906374
+  **** **  *******  **  PROGRAM STARTED IN /hppfs/scratch/04/di38fab/09_GTH/Delt
+                                           a_Set/K/TZV2P-MOLOPT-PBE-GTH/8x8x8
+
+ CP2K| version string:                 CP2K version 2025.1 (Development Version)
+ CP2K| source code revision number:                                  git:3130539
+ CP2K| cp2kflags: omp libint fftw3 libxc parallel scalapack max_contr=4         
+ CP2K| is freely available from                            https://www.cp2k.org/
+ CP2K| Program compiled at                         Tue Jun  3 16:14:32 CEST 2025
+ CP2K| Program compiled on                                               login01
+ CP2K| Program compiled for                                        Supermuc-foss
+ CP2K| Data directory path                  /hppfs/work/pn36zo/di38fab/cp2k/data
+ CP2K| Input file name                                                    GW.inp
+
+ GLOBAL| Force Environment number                                              1
+ GLOBAL| Basis set file name            /hppfs/scratch/04/di38fab/09_GTH/BASIS_A
+ GLOBAL| Potential file name            /hppfs/work/pn36zo/di38fab/cp2k/data/GTH
+ GLOBAL| MM Potential file name                                     MM_POTENTIAL
+ GLOBAL| Coordinate file name                                              K.cif
+ GLOBAL| Method name                                                        CP2K
+ GLOBAL| Project name                                                       WSe2
+ GLOBAL| Run type                                                         ENERGY
+ GLOBAL| FFT library                                                       FFTW3
+ GLOBAL| Diagonalization library                                       ScaLAPACK
+ GLOBAL| Cholesky decomposition library                                ScaLAPACK
+ GLOBAL| DGEMM library                                                      BLAS
+ GLOBAL| Orthonormality check for eigenvectors                          DISABLED
+ GLOBAL| Matrix multiplication library                                 ScaLAPACK
+ GLOBAL| All-to-all communication in single precision                          F
+ GLOBAL| FFTs using library dependent lengths                                  F
+ GLOBAL| Grid backend                                                       AUTO
+ GLOBAL| Global print level                                               MEDIUM
+ GLOBAL| MPI I/O enabled                                                       T
+ GLOBAL| Total number of message passing processes                             8
+ GLOBAL| Number of threads for this process                                   12
+ GLOBAL| This output is from process                                           0
+ GLOBAL| OpenMP stack size per thread (OMP_STACKSIZE)                    default
+ GLOBAL| CPU model name             Intel(R) Xeon(R) Platinum 8174 CPU @ 3.10GHz
+
+ MEMORY| system memory details [Kb]
+ MEMORY|                        rank 0           min           max       average
+ MEMORY| MemTotal             98436664      98436664      98436664      98436664
+ MEMORY| MemFree              84578560      84560088      84578560      84569324
+ MEMORY| Buffers                     0             0             0             0
+ MEMORY| Cached                2370728       2370728       2378376       2374552
+ MEMORY| Slab                  1298088       1296284       1298088       1297186
+ MEMORY| SReclaimable           279900        279900        283256        281578
+ MEMORY| MemLikelyFree        87229188      87221720      87229188      87225454
+
+
+ *** Fundamental physical constants (SI units) ***
+
+ *** Literature: B. J. Mohr and B. N. Taylor,
+ ***             CODATA recommended values of the fundamental physical
+ ***             constants: 2006, Web Version 5.1
+ ***             http://physics.nist.gov/constants
+
+ Speed of light in vacuum [m/s]                             2.99792458000000E+08
+ Magnetic constant or permeability of vacuum [N/A**2]       1.25663706143592E-06
+ Electric constant or permittivity of vacuum [F/m]          8.85418781762039E-12
+ Planck constant (h) [J*s]                                  6.62606896000000E-34
+ Planck constant (h-bar) [J*s]                              1.05457162825177E-34
+ Elementary charge [C]                                      1.60217648700000E-19
+ Electron mass [kg]                                         9.10938215000000E-31
+ Electron g factor [ ]                                     -2.00231930436220E+00
+ Proton mass [kg]                                           1.67262163700000E-27
+ Fine-structure constant                                    7.29735253760000E-03
+ Rydberg constant [1/m]                                     1.09737315685270E+07
+ Avogadro constant [1/mol]                                  6.02214179000000E+23
+ Boltzmann constant [J/K]                                   1.38065040000000E-23
+ Atomic mass unit [kg]                                      1.66053878200000E-27
+ Bohr radius [m]                                            5.29177208590000E-11
+
+ *** Conversion factors ***
+
+ [u] -> [a.u.]                                              1.82288848426455E+03
+ [Angstrom] -> [Bohr] = [a.u.]                              1.88972613288564E+00
+ [a.u.] = [Bohr] -> [Angstrom]                              5.29177208590000E-01
+ [a.u.] -> [s]                                              2.41888432650478E-17
+ [a.u.] -> [fs]                                             2.41888432650478E-02
+ [a.u.] -> [J]                                              4.35974393937059E-18
+ [a.u.] -> [N]                                              8.23872205491840E-08
+ [a.u.] -> [K]                                              3.15774647902944E+05
+ [a.u.] -> [kJ/mol]                                         2.62549961709828E+03
+ [a.u.] -> [kcal/mol]                                       6.27509468713739E+02
+ [a.u.] -> [Pa]                                             2.94210107994716E+13
+ [a.u.] -> [bar]                                            2.94210107994716E+08
+ [a.u.] -> [atm]                                            2.90362800883016E+08
+ [a.u.] -> [eV]                                             2.72113838565563E+01
+ [a.u.] -> [Hz]                                             6.57968392072181E+15
+ [a.u.] -> [1/cm] (wave numbers)                            2.19474631370540E+05
+ [a.u./Bohr**2] -> [1/cm]                                   5.14048714338585E+03
+ 
+
+ CELL_TOP| Volume [angstrom^3]:                                       147.691113
+ CELL_TOP| Vector a [angstrom     5.286     0.000     0.000   |a| =     5.285890
+ CELL_TOP| Vector b [angstrom     0.000     5.286     0.000   |b| =     5.285890
+ CELL_TOP| Vector c [angstrom     0.000     0.000     5.286   |c| =     5.285890
+ CELL_TOP| Angle (b,c), alpha [degree]:                                90.000000
+ CELL_TOP| Angle (a,c), beta  [degree]:                                90.000000
+ CELL_TOP| Angle (a,b), gamma [degree]:                                90.000000
+ CELL_TOP| Numerically orthorhombic:                                         YES
+ CELL_TOP| Periodicity                                                       XYZ
+
+ CELL_CIF| Volume [angstrom^3]:                                       147.691113
+ CELL_CIF| Vector a [angstrom     5.286     0.000     0.000   |a| =     5.285890
+ CELL_CIF| Vector b [angstrom     0.000     5.286     0.000   |b| =     5.285890
+ CELL_CIF| Vector c [angstrom     0.000     0.000     5.286   |c| =     5.285890
+ CELL_CIF| Angle (b,c), alpha [degree]:                                90.000000
+ CELL_CIF| Angle (a,c), beta  [degree]:                                90.000000
+ CELL_CIF| Angle (a,b), gamma [degree]:                                90.000000
+ CELL_CIF| Numerically orthorhombic:                                         YES
+ CELL_CIF| Periodicity                                                       XYZ
+
+ GENERATE|  Preliminary Number of Bonds generated:                             0
+ GENERATE|  Achieved consistency in connectivity generation.
+
+ CELL| Volume [angstrom^3]:                                           147.691113
+ CELL| Vector a [angstrom]:       5.286     0.000     0.000   |a| =     5.285890
+ CELL| Vector b [angstrom]:       0.000     5.286     0.000   |b| =     5.285890
+ CELL| Vector c [angstrom]:       0.000     0.000     5.286   |c| =     5.285890
+ CELL| Angle (b,c), alpha [degree]:                                    90.000000
+ CELL| Angle (a,c), beta  [degree]:                                    90.000000
+ CELL| Angle (a,b), gamma [degree]:                                    90.000000
+ CELL| Numerically orthorhombic:                                             YES
+ CELL| Periodicity                                                           XYZ
+
+ CELL_REF| Volume [angstrom^3]:                                       147.691113
+ CELL_REF| Vector a [angstrom     5.286     0.000     0.000   |a| =     5.285890
+ CELL_REF| Vector b [angstrom     0.000     5.286     0.000   |b| =     5.285890
+ CELL_REF| Vector c [angstrom     0.000     0.000     5.286   |c| =     5.285890
+ CELL_REF| Angle (b,c), alpha [degree]:                                90.000000
+ CELL_REF| Angle (a,c), beta  [degree]:                                90.000000
+ CELL_REF| Angle (a,b), gamma [degree]:                                90.000000
+ CELL_REF| Numerically orthorhombic:                                         YES
+ CELL_REF| Periodicity                                                       XYZ
+
+ *** WARNING in cryssym.F:180 :: Symmetry library SPGLIB not available ***
+
+
+ *******************************************************************************
+                                    Kpoints
+ *******************************************************************************
+ BRILLOUIN| K-point scheme                                        Monkhorst-Pack
+ BRILLOUIN| K-Point grid                                             8    8    8
+ BRILLOUIN| Accuracy in Symmetry determination                      0.100000E-05
+ BRILLOUIN| K-Point point group symmetrization                               OFF
+ BRILLOUIN| Wavefunction type                                            COMPLEX
+ BRILLOUIN| List of Kpoints [2 Pi/Bohr]                                      256
+ BRILLOUIN| Number           Weight            X              Y              Z
+ BRILLOUIN|     1           0.00391       -0.43750       -0.43750       -0.43750
+ BRILLOUIN|     2           0.00391       -0.43750       -0.43750       -0.31250
+ BRILLOUIN|     3           0.00391       -0.43750       -0.43750       -0.18750
+ BRILLOUIN|     4           0.00391       -0.43750       -0.43750       -0.06250
+ BRILLOUIN|     5           0.00391       -0.43750       -0.43750        0.06250
+ BRILLOUIN|     6           0.00391       -0.43750       -0.43750        0.18750
+ BRILLOUIN|     7           0.00391       -0.43750       -0.43750        0.31250
+ BRILLOUIN|     8           0.00391       -0.43750       -0.43750        0.43750
+ BRILLOUIN|     9           0.00391       -0.43750       -0.31250       -0.43750
+ BRILLOUIN|    10           0.00391       -0.43750       -0.31250       -0.31250
+ BRILLOUIN|    11           0.00391       -0.43750       -0.31250       -0.18750
+ BRILLOUIN|    12           0.00391       -0.43750       -0.31250       -0.06250
+ BRILLOUIN|    13           0.00391       -0.43750       -0.31250        0.06250
+ BRILLOUIN|    14           0.00391       -0.43750       -0.31250        0.18750
+ BRILLOUIN|    15           0.00391       -0.43750       -0.31250        0.31250
+ BRILLOUIN|    16           0.00391       -0.43750       -0.31250        0.43750
+ BRILLOUIN|    17           0.00391       -0.43750       -0.18750       -0.43750
+ BRILLOUIN|    18           0.00391       -0.43750       -0.18750       -0.31250
+ BRILLOUIN|    19           0.00391       -0.43750       -0.18750       -0.18750
+ BRILLOUIN|    20           0.00391       -0.43750       -0.18750       -0.06250
+ BRILLOUIN|    21           0.00391       -0.43750       -0.18750        0.06250
+ BRILLOUIN|    22           0.00391       -0.43750       -0.18750        0.18750
+ BRILLOUIN|    23           0.00391       -0.43750       -0.18750        0.31250
+ BRILLOUIN|    24           0.00391       -0.43750       -0.18750        0.43750
+ BRILLOUIN|    25           0.00391       -0.43750       -0.06250       -0.43750
+ BRILLOUIN|    26           0.00391       -0.43750       -0.06250       -0.31250
+ BRILLOUIN|    27           0.00391       -0.43750       -0.06250       -0.18750
+ BRILLOUIN|    28           0.00391       -0.43750       -0.06250       -0.06250
+ BRILLOUIN|    29           0.00391       -0.43750       -0.06250        0.06250
+ BRILLOUIN|    30           0.00391       -0.43750       -0.06250        0.18750
+ BRILLOUIN|    31           0.00391       -0.43750       -0.06250        0.31250
+ BRILLOUIN|    32           0.00391       -0.43750       -0.06250        0.43750
+ BRILLOUIN|    33           0.00391       -0.43750        0.06250       -0.43750
+ BRILLOUIN|    34           0.00391       -0.43750        0.06250       -0.31250
+ BRILLOUIN|    35           0.00391       -0.43750        0.06250       -0.18750
+ BRILLOUIN|    36           0.00391       -0.43750        0.06250       -0.06250
+ BRILLOUIN|    37           0.00391       -0.43750        0.06250        0.06250
+ BRILLOUIN|    38           0.00391       -0.43750        0.06250        0.18750
+ BRILLOUIN|    39           0.00391       -0.43750        0.06250        0.31250
+ BRILLOUIN|    40           0.00391       -0.43750        0.06250        0.43750
+ BRILLOUIN|    41           0.00391       -0.43750        0.18750       -0.43750
+ BRILLOUIN|    42           0.00391       -0.43750        0.18750       -0.31250
+ BRILLOUIN|    43           0.00391       -0.43750        0.18750       -0.18750
+ BRILLOUIN|    44           0.00391       -0.43750        0.18750       -0.06250
+ BRILLOUIN|    45           0.00391       -0.43750        0.18750        0.06250
+ BRILLOUIN|    46           0.00391       -0.43750        0.18750        0.18750
+ BRILLOUIN|    47           0.00391       -0.43750        0.18750        0.31250
+ BRILLOUIN|    48           0.00391       -0.43750        0.18750        0.43750
+ BRILLOUIN|    49           0.00391       -0.43750        0.31250       -0.43750
+ BRILLOUIN|    50           0.00391       -0.43750        0.31250       -0.31250
+ BRILLOUIN|    51           0.00391       -0.43750        0.31250       -0.18750
+ BRILLOUIN|    52           0.00391       -0.43750        0.31250       -0.06250
+ BRILLOUIN|    53           0.00391       -0.43750        0.31250        0.06250
+ BRILLOUIN|    54           0.00391       -0.43750        0.31250        0.18750
+ BRILLOUIN|    55           0.00391       -0.43750        0.31250        0.31250
+ BRILLOUIN|    56           0.00391       -0.43750        0.31250        0.43750
+ BRILLOUIN|    57           0.00391       -0.43750        0.43750       -0.43750
+ BRILLOUIN|    58           0.00391       -0.43750        0.43750       -0.31250
+ BRILLOUIN|    59           0.00391       -0.43750        0.43750       -0.18750
+ BRILLOUIN|    60           0.00391       -0.43750        0.43750       -0.06250
+ BRILLOUIN|    61           0.00391       -0.43750        0.43750        0.06250
+ BRILLOUIN|    62           0.00391       -0.43750        0.43750        0.18750
+ BRILLOUIN|    63           0.00391       -0.43750        0.43750        0.31250
+ BRILLOUIN|    64           0.00391       -0.43750        0.43750        0.43750
+ BRILLOUIN|    65           0.00391       -0.31250       -0.43750       -0.43750
+ BRILLOUIN|    66           0.00391       -0.31250       -0.43750       -0.31250
+ BRILLOUIN|    67           0.00391       -0.31250       -0.43750       -0.18750
+ BRILLOUIN|    68           0.00391       -0.31250       -0.43750       -0.06250
+ BRILLOUIN|    69           0.00391       -0.31250       -0.43750        0.06250
+ BRILLOUIN|    70           0.00391       -0.31250       -0.43750        0.18750
+ BRILLOUIN|    71           0.00391       -0.31250       -0.43750        0.31250
+ BRILLOUIN|    72           0.00391       -0.31250       -0.43750        0.43750
+ BRILLOUIN|    73           0.00391       -0.31250       -0.31250       -0.43750
+ BRILLOUIN|    74           0.00391       -0.31250       -0.31250       -0.31250
+ BRILLOUIN|    75           0.00391       -0.31250       -0.31250       -0.18750
+ BRILLOUIN|    76           0.00391       -0.31250       -0.31250       -0.06250
+ BRILLOUIN|    77           0.00391       -0.31250       -0.31250        0.06250
+ BRILLOUIN|    78           0.00391       -0.31250       -0.31250        0.18750
+ BRILLOUIN|    79           0.00391       -0.31250       -0.31250        0.31250
+ BRILLOUIN|    80           0.00391       -0.31250       -0.31250        0.43750
+ BRILLOUIN|    81           0.00391       -0.31250       -0.18750       -0.43750
+ BRILLOUIN|    82           0.00391       -0.31250       -0.18750       -0.31250
+ BRILLOUIN|    83           0.00391       -0.31250       -0.18750       -0.18750
+ BRILLOUIN|    84           0.00391       -0.31250       -0.18750       -0.06250
+ BRILLOUIN|    85           0.00391       -0.31250       -0.18750        0.06250
+ BRILLOUIN|    86           0.00391       -0.31250       -0.18750        0.18750
+ BRILLOUIN|    87           0.00391       -0.31250       -0.18750        0.31250
+ BRILLOUIN|    88           0.00391       -0.31250       -0.18750        0.43750
+ BRILLOUIN|    89           0.00391       -0.31250       -0.06250       -0.43750
+ BRILLOUIN|    90           0.00391       -0.31250       -0.06250       -0.31250
+ BRILLOUIN|    91           0.00391       -0.31250       -0.06250       -0.18750
+ BRILLOUIN|    92           0.00391       -0.31250       -0.06250       -0.06250
+ BRILLOUIN|    93           0.00391       -0.31250       -0.06250        0.06250
+ BRILLOUIN|    94           0.00391       -0.31250       -0.06250        0.18750
+ BRILLOUIN|    95           0.00391       -0.31250       -0.06250        0.31250
+ BRILLOUIN|    96           0.00391       -0.31250       -0.06250        0.43750
+ BRILLOUIN|    97           0.00391       -0.31250        0.06250       -0.43750
+ BRILLOUIN|    98           0.00391       -0.31250        0.06250       -0.31250
+ BRILLOUIN|    99           0.00391       -0.31250        0.06250       -0.18750
+ BRILLOUIN|   100           0.00391       -0.31250        0.06250       -0.06250
+ BRILLOUIN|   101           0.00391       -0.31250        0.06250        0.06250
+ BRILLOUIN|   102           0.00391       -0.31250        0.06250        0.18750
+ BRILLOUIN|   103           0.00391       -0.31250        0.06250        0.31250
+ BRILLOUIN|   104           0.00391       -0.31250        0.06250        0.43750
+ BRILLOUIN|   105           0.00391       -0.31250        0.18750       -0.43750
+ BRILLOUIN|   106           0.00391       -0.31250        0.18750       -0.31250
+ BRILLOUIN|   107           0.00391       -0.31250        0.18750       -0.18750
+ BRILLOUIN|   108           0.00391       -0.31250        0.18750       -0.06250
+ BRILLOUIN|   109           0.00391       -0.31250        0.18750        0.06250
+ BRILLOUIN|   110           0.00391       -0.31250        0.18750        0.18750
+ BRILLOUIN|   111           0.00391       -0.31250        0.18750        0.31250
+ BRILLOUIN|   112           0.00391       -0.31250        0.18750        0.43750
+ BRILLOUIN|   113           0.00391       -0.31250        0.31250       -0.43750
+ BRILLOUIN|   114           0.00391       -0.31250        0.31250       -0.31250
+ BRILLOUIN|   115           0.00391       -0.31250        0.31250       -0.18750
+ BRILLOUIN|   116           0.00391       -0.31250        0.31250       -0.06250
+ BRILLOUIN|   117           0.00391       -0.31250        0.31250        0.06250
+ BRILLOUIN|   118           0.00391       -0.31250        0.31250        0.18750
+ BRILLOUIN|   119           0.00391       -0.31250        0.31250        0.31250
+ BRILLOUIN|   120           0.00391       -0.31250        0.31250        0.43750
+ BRILLOUIN|   121           0.00391       -0.31250        0.43750       -0.43750
+ BRILLOUIN|   122           0.00391       -0.31250        0.43750       -0.31250
+ BRILLOUIN|   123           0.00391       -0.31250        0.43750       -0.18750
+ BRILLOUIN|   124           0.00391       -0.31250        0.43750       -0.06250
+ BRILLOUIN|   125           0.00391       -0.31250        0.43750        0.06250
+ BRILLOUIN|   126           0.00391       -0.31250        0.43750        0.18750
+ BRILLOUIN|   127           0.00391       -0.31250        0.43750        0.31250
+ BRILLOUIN|   128           0.00391       -0.31250        0.43750        0.43750
+ BRILLOUIN|   129           0.00391       -0.18750       -0.43750       -0.43750
+ BRILLOUIN|   130           0.00391       -0.18750       -0.43750       -0.31250
+ BRILLOUIN|   131           0.00391       -0.18750       -0.43750       -0.18750
+ BRILLOUIN|   132           0.00391       -0.18750       -0.43750       -0.06250
+ BRILLOUIN|   133           0.00391       -0.18750       -0.43750        0.06250
+ BRILLOUIN|   134           0.00391       -0.18750       -0.43750        0.18750
+ BRILLOUIN|   135           0.00391       -0.18750       -0.43750        0.31250
+ BRILLOUIN|   136           0.00391       -0.18750       -0.43750        0.43750
+ BRILLOUIN|   137           0.00391       -0.18750       -0.31250       -0.43750
+ BRILLOUIN|   138           0.00391       -0.18750       -0.31250       -0.31250
+ BRILLOUIN|   139           0.00391       -0.18750       -0.31250       -0.18750
+ BRILLOUIN|   140           0.00391       -0.18750       -0.31250       -0.06250
+ BRILLOUIN|   141           0.00391       -0.18750       -0.31250        0.06250
+ BRILLOUIN|   142           0.00391       -0.18750       -0.31250        0.18750
+ BRILLOUIN|   143           0.00391       -0.18750       -0.31250        0.31250
+ BRILLOUIN|   144           0.00391       -0.18750       -0.31250        0.43750
+ BRILLOUIN|   145           0.00391       -0.18750       -0.18750       -0.43750
+ BRILLOUIN|   146           0.00391       -0.18750       -0.18750       -0.31250
+ BRILLOUIN|   147           0.00391       -0.18750       -0.18750       -0.18750
+ BRILLOUIN|   148           0.00391       -0.18750       -0.18750       -0.06250
+ BRILLOUIN|   149           0.00391       -0.18750       -0.18750        0.06250
+ BRILLOUIN|   150           0.00391       -0.18750       -0.18750        0.18750
+ BRILLOUIN|   151           0.00391       -0.18750       -0.18750        0.31250
+ BRILLOUIN|   152           0.00391       -0.18750       -0.18750        0.43750
+ BRILLOUIN|   153           0.00391       -0.18750       -0.06250       -0.43750
+ BRILLOUIN|   154           0.00391       -0.18750       -0.06250       -0.31250
+ BRILLOUIN|   155           0.00391       -0.18750       -0.06250       -0.18750
+ BRILLOUIN|   156           0.00391       -0.18750       -0.06250       -0.06250
+ BRILLOUIN|   157           0.00391       -0.18750       -0.06250        0.06250
+ BRILLOUIN|   158           0.00391       -0.18750       -0.06250        0.18750
+ BRILLOUIN|   159           0.00391       -0.18750       -0.06250        0.31250
+ BRILLOUIN|   160           0.00391       -0.18750       -0.06250        0.43750
+ BRILLOUIN|   161           0.00391       -0.18750        0.06250       -0.43750
+ BRILLOUIN|   162           0.00391       -0.18750        0.06250       -0.31250
+ BRILLOUIN|   163           0.00391       -0.18750        0.06250       -0.18750
+ BRILLOUIN|   164           0.00391       -0.18750        0.06250       -0.06250
+ BRILLOUIN|   165           0.00391       -0.18750        0.06250        0.06250
+ BRILLOUIN|   166           0.00391       -0.18750        0.06250        0.18750
+ BRILLOUIN|   167           0.00391       -0.18750        0.06250        0.31250
+ BRILLOUIN|   168           0.00391       -0.18750        0.06250        0.43750
+ BRILLOUIN|   169           0.00391       -0.18750        0.18750       -0.43750
+ BRILLOUIN|   170           0.00391       -0.18750        0.18750       -0.31250
+ BRILLOUIN|   171           0.00391       -0.18750        0.18750       -0.18750
+ BRILLOUIN|   172           0.00391       -0.18750        0.18750       -0.06250
+ BRILLOUIN|   173           0.00391       -0.18750        0.18750        0.06250
+ BRILLOUIN|   174           0.00391       -0.18750        0.18750        0.18750
+ BRILLOUIN|   175           0.00391       -0.18750        0.18750        0.31250
+ BRILLOUIN|   176           0.00391       -0.18750        0.18750        0.43750
+ BRILLOUIN|   177           0.00391       -0.18750        0.31250       -0.43750
+ BRILLOUIN|   178           0.00391       -0.18750        0.31250       -0.31250
+ BRILLOUIN|   179           0.00391       -0.18750        0.31250       -0.18750
+ BRILLOUIN|   180           0.00391       -0.18750        0.31250       -0.06250
+ BRILLOUIN|   181           0.00391       -0.18750        0.31250        0.06250
+ BRILLOUIN|   182           0.00391       -0.18750        0.31250        0.18750
+ BRILLOUIN|   183           0.00391       -0.18750        0.31250        0.31250
+ BRILLOUIN|   184           0.00391       -0.18750        0.31250        0.43750
+ BRILLOUIN|   185           0.00391       -0.18750        0.43750       -0.43750
+ BRILLOUIN|   186           0.00391       -0.18750        0.43750       -0.31250
+ BRILLOUIN|   187           0.00391       -0.18750        0.43750       -0.18750
+ BRILLOUIN|   188           0.00391       -0.18750        0.43750       -0.06250
+ BRILLOUIN|   189           0.00391       -0.18750        0.43750        0.06250
+ BRILLOUIN|   190           0.00391       -0.18750        0.43750        0.18750
+ BRILLOUIN|   191           0.00391       -0.18750        0.43750        0.31250
+ BRILLOUIN|   192           0.00391       -0.18750        0.43750        0.43750
+ BRILLOUIN|   193           0.00391       -0.06250       -0.43750       -0.43750
+ BRILLOUIN|   194           0.00391       -0.06250       -0.43750       -0.31250
+ BRILLOUIN|   195           0.00391       -0.06250       -0.43750       -0.18750
+ BRILLOUIN|   196           0.00391       -0.06250       -0.43750       -0.06250
+ BRILLOUIN|   197           0.00391       -0.06250       -0.43750        0.06250
+ BRILLOUIN|   198           0.00391       -0.06250       -0.43750        0.18750
+ BRILLOUIN|   199           0.00391       -0.06250       -0.43750        0.31250
+ BRILLOUIN|   200           0.00391       -0.06250       -0.43750        0.43750
+ BRILLOUIN|   201           0.00391       -0.06250       -0.31250       -0.43750
+ BRILLOUIN|   202           0.00391       -0.06250       -0.31250       -0.31250
+ BRILLOUIN|   203           0.00391       -0.06250       -0.31250       -0.18750
+ BRILLOUIN|   204           0.00391       -0.06250       -0.31250       -0.06250
+ BRILLOUIN|   205           0.00391       -0.06250       -0.31250        0.06250
+ BRILLOUIN|   206           0.00391       -0.06250       -0.31250        0.18750
+ BRILLOUIN|   207           0.00391       -0.06250       -0.31250        0.31250
+ BRILLOUIN|   208           0.00391       -0.06250       -0.31250        0.43750
+ BRILLOUIN|   209           0.00391       -0.06250       -0.18750       -0.43750
+ BRILLOUIN|   210           0.00391       -0.06250       -0.18750       -0.31250
+ BRILLOUIN|   211           0.00391       -0.06250       -0.18750       -0.18750
+ BRILLOUIN|   212           0.00391       -0.06250       -0.18750       -0.06250
+ BRILLOUIN|   213           0.00391       -0.06250       -0.18750        0.06250
+ BRILLOUIN|   214           0.00391       -0.06250       -0.18750        0.18750
+ BRILLOUIN|   215           0.00391       -0.06250       -0.18750        0.31250
+ BRILLOUIN|   216           0.00391       -0.06250       -0.18750        0.43750
+ BRILLOUIN|   217           0.00391       -0.06250       -0.06250       -0.43750
+ BRILLOUIN|   218           0.00391       -0.06250       -0.06250       -0.31250
+ BRILLOUIN|   219           0.00391       -0.06250       -0.06250       -0.18750
+ BRILLOUIN|   220           0.00391       -0.06250       -0.06250       -0.06250
+ BRILLOUIN|   221           0.00391       -0.06250       -0.06250        0.06250
+ BRILLOUIN|   222           0.00391       -0.06250       -0.06250        0.18750
+ BRILLOUIN|   223           0.00391       -0.06250       -0.06250        0.31250
+ BRILLOUIN|   224           0.00391       -0.06250       -0.06250        0.43750
+ BRILLOUIN|   225           0.00391       -0.06250        0.06250       -0.43750
+ BRILLOUIN|   226           0.00391       -0.06250        0.06250       -0.31250
+ BRILLOUIN|   227           0.00391       -0.06250        0.06250       -0.18750
+ BRILLOUIN|   228           0.00391       -0.06250        0.06250       -0.06250
+ BRILLOUIN|   229           0.00391       -0.06250        0.06250        0.06250
+ BRILLOUIN|   230           0.00391       -0.06250        0.06250        0.18750
+ BRILLOUIN|   231           0.00391       -0.06250        0.06250        0.31250
+ BRILLOUIN|   232           0.00391       -0.06250        0.06250        0.43750
+ BRILLOUIN|   233           0.00391       -0.06250        0.18750       -0.43750
+ BRILLOUIN|   234           0.00391       -0.06250        0.18750       -0.31250
+ BRILLOUIN|   235           0.00391       -0.06250        0.18750       -0.18750
+ BRILLOUIN|   236           0.00391       -0.06250        0.18750       -0.06250
+ BRILLOUIN|   237           0.00391       -0.06250        0.18750        0.06250
+ BRILLOUIN|   238           0.00391       -0.06250        0.18750        0.18750
+ BRILLOUIN|   239           0.00391       -0.06250        0.18750        0.31250
+ BRILLOUIN|   240           0.00391       -0.06250        0.18750        0.43750
+ BRILLOUIN|   241           0.00391       -0.06250        0.31250       -0.43750
+ BRILLOUIN|   242           0.00391       -0.06250        0.31250       -0.31250
+ BRILLOUIN|   243           0.00391       -0.06250        0.31250       -0.18750
+ BRILLOUIN|   244           0.00391       -0.06250        0.31250       -0.06250
+ BRILLOUIN|   245           0.00391       -0.06250        0.31250        0.06250
+ BRILLOUIN|   246           0.00391       -0.06250        0.31250        0.18750
+ BRILLOUIN|   247           0.00391       -0.06250        0.31250        0.31250
+ BRILLOUIN|   248           0.00391       -0.06250        0.31250        0.43750
+ BRILLOUIN|   249           0.00391       -0.06250        0.43750       -0.43750
+ BRILLOUIN|   250           0.00391       -0.06250        0.43750       -0.31250
+ BRILLOUIN|   251           0.00391       -0.06250        0.43750       -0.18750
+ BRILLOUIN|   252           0.00391       -0.06250        0.43750       -0.06250
+ BRILLOUIN|   253           0.00391       -0.06250        0.43750        0.06250
+ BRILLOUIN|   254           0.00391       -0.06250        0.43750        0.18750
+ BRILLOUIN|   255           0.00391       -0.06250        0.43750        0.31250
+ BRILLOUIN|   256           0.00391       -0.06250        0.43750        0.43750
+ *******************************************************************************
+
+ *******************************************************************************
+ *******************************************************************************
+ **                                                                           **
+ **     #####                         ##              ##                      **
+ **    ##   ##            ##          ##              ##                      **
+ **   ##     ##                       ##            ######                    **
+ **   ##     ##  ##   ##  ##   #####  ##  ##   ####   ##    #####    #####    **
+ **   ##     ##  ##   ##  ##  ##      ## ##   ##      ##   ##   ##  ##   ##   **
+ **   ##  ## ##  ##   ##  ##  ##      ####     ###    ##   ######   ######    **
+ **    ##  ###   ##   ##  ##  ##      ## ##      ##   ##   ##       ##        **
+ **     #######   #####   ##   #####  ##  ##  ####    ##    #####   ##        **
+ **           ##                                                    ##        **
+ **                                                                           **
+ **                                                ... make the atoms dance   **
+ **                                                                           **
+ **            Copyright (C) by CP2K developers group (2000-2025)             **
+ **                      J. Chem. Phys. 152, 194103 (2020)                    **
+ **                                                                           **
+ *******************************************************************************
+
+ DFT| Spin restricted Kohn-Sham (RKS) calculation                            RKS
+ DFT| Multiplicity                                                             1
+ DFT| Number of spin states                                                    1
+ DFT| Charge                                                                   0
+ DFT| Self-interaction correction (SIC)                                       NO
+ DFT| Cutoffs: density                                              1.000000E-10
+ DFT|          gradient                                             1.000000E-10
+ DFT|          tau                                                  1.000000E-10
+ DFT|          cutoff_smoothing_range                               0.000000E+00
+ DFT| XC density smoothing                                                  NONE
+ DFT| XC derivatives                                                          PW
+
+ FUNCTIONAL| PBE:
+ FUNCTIONAL| J.P.Perdew, K.Burke, M.Ernzerhof, Phys. Rev. Letter, vol. 77, n 18,
+ FUNCTIONAL|  pp. 3865-3868, (1996) {spin unpolarized}                          
+
+
+ QS| Method:                                                                 GPW
+ QS| Density plane wave grid type                        NON-SPHERICAL FULLSPACE
+ QS| Number of grid levels:                                                    4
+ QS| Density cutoff [a.u.]:                                                500.0
+ QS| Multi grid cutoff [a.u.]: 1) grid level                               500.0
+ QS|                           2) grid level                               166.7
+ QS|                           3) grid level                                55.6
+ QS|                           4) grid level                                18.5
+ QS| Grid level progression factor:                                          3.0
+ QS| Relative density cutoff [a.u.]:                                        50.0
+ QS| Interaction thresholds: eps_pgf_orb:                                1.0E-16
+ QS|                         eps_filter_matrix:                          0.0E+00
+ QS|                         eps_core_charge:                            1.0E-18
+ QS|                         eps_rho_gspace:                             1.0E-16
+ QS|                         eps_rho_rspace:                             1.0E-16
+ QS|                         eps_gvg_rspace:                             1.0E-08
+ QS|                         eps_ppl:                                    1.0E-02
+ QS|                         eps_ppnl:                                   1.0E-10
+
+
+ ATOMIC KIND INFORMATION
+
+  1. Atomic kind: K                                     Number of atoms:       2
+
+     Orbital Basis Set                                   TZV2P-MOLOPT-GGA-GTH-q9
+
+       Number of orbital shell sets:                                           1
+       Number of orbital shells:                                               9
+       Number of primitive Cartesian functions:                                6
+       Number of Cartesian basis functions:                                   25
+       Number of spherical basis functions:                                   23
+       Norm type:                                                              2
+
+       Normalised Cartesian orbitals:
+
+                        Set   Shell   Orbital            Exponent    Coefficient
+
+                          1       1    2s                2.487480      -0.503099
+                                                         2.273943       0.279113
+                                                         0.705531       0.079761
+                                                         0.271151      -0.010380
+                                                         0.092761       0.080620
+                                                         0.030615       0.018722
+
+                          1       2    3s                2.487480       0.801856
+                                                         2.273943      -0.568825
+                                                         0.705531      -0.176030
+                                                         0.271151      -0.095839
+                                                         0.092761      -0.014604
+                                                         0.030615       0.059357
+
+                          1       3    4s                2.487480       2.140593
+                                                         2.273943      -1.852667
+                                                         0.705531      -0.444899
+                                                         0.271151      -0.137459
+                                                         0.092761       0.258937
+                                                         0.030615      -0.075488
+
+                          1       4    5s                2.487480       0.594528
+                                                         2.273943       1.421869
+                                                         0.705531      -0.635934
+                                                         0.271151       0.145393
+                                                         0.092761       0.016299
+                                                         0.030615       0.002939
+
+                          1       5    3px               2.487480       3.998050
+                                                         2.273943      -4.103765
+                                                         0.705531      -0.537110
+                                                         0.271151      -0.107731
+                                                         0.092761       0.004357
+                                                         0.030615       0.005360
+                          1       5    3py               2.487480       3.998050
+                                                         2.273943      -4.103765
+                                                         0.705531      -0.537110
+                                                         0.271151      -0.107731
+                                                         0.092761       0.004357
+                                                         0.030615       0.005360
+                          1       5    3pz               2.487480       3.998050
+                                                         2.273943      -4.103765
+                                                         0.705531      -0.537110
+                                                         0.271151      -0.107731
+                                                         0.092761       0.004357
+                                                         0.030615       0.005360
+
+                          1       6    4px               2.487480      -0.509867
+                                                         2.273943       0.466004
+                                                         0.705531       0.017615
+                                                         0.271151       0.003292
+                                                         0.092761       0.022406
+                                                         0.030615       0.013731
+                          1       6    4py               2.487480      -0.509867
+                                                         2.273943       0.466004
+                                                         0.705531       0.017615
+                                                         0.271151       0.003292
+                                                         0.092761       0.022406
+                                                         0.030615       0.013731
+                          1       6    4pz               2.487480      -0.509867
+                                                         2.273943       0.466004
+                                                         0.705531       0.017615
+                                                         0.271151       0.003292
+                                                         0.092761       0.022406
+                                                         0.030615       0.013731
+
+                          1       7    5px               2.487480      -0.569811
+                                                         2.273943      -0.093741
+                                                         0.705531      -0.408552
+                                                         0.271151       0.068836
+                                                         0.092761       0.084775
+                                                         0.030615      -0.008811
+                          1       7    5py               2.487480      -0.569811
+                                                         2.273943      -0.093741
+                                                         0.705531      -0.408552
+                                                         0.271151       0.068836
+                                                         0.092761       0.084775
+                                                         0.030615      -0.008811
+                          1       7    5pz               2.487480      -0.569811
+                                                         2.273943      -0.093741
+                                                         0.705531      -0.408552
+                                                         0.271151       0.068836
+                                                         0.092761       0.084775
+                                                         0.030615      -0.008811
+
+                          1       8    4dx2              2.487480      -0.388056
+                                                         2.273943       1.242867
+                                                         0.705531       0.224873
+                                                         0.271151       0.053850
+                                                         0.092761       0.010861
+                                                         0.030615       0.001026
+                          1       8    4dxy              2.487480      -0.672133
+                                                         2.273943       2.152709
+                                                         0.705531       0.389491
+                                                         0.271151       0.093271
+                                                         0.092761       0.018811
+                                                         0.030615       0.001778
+                          1       8    4dxz              2.487480      -0.672133
+                                                         2.273943       2.152709
+                                                         0.705531       0.389491
+                                                         0.271151       0.093271
+                                                         0.092761       0.018811
+                                                         0.030615       0.001778
+                          1       8    4dy2              2.487480      -0.388056
+                                                         2.273943       1.242867
+                                                         0.705531       0.224873
+                                                         0.271151       0.053850
+                                                         0.092761       0.010861
+                                                         0.030615       0.001026
+                          1       8    4dyz              2.487480      -0.672133
+                                                         2.273943       2.152709
+                                                         0.705531       0.389491
+                                                         0.271151       0.093271
+                                                         0.092761       0.018811
+                                                         0.030615       0.001778
+                          1       8    4dz2              2.487480      -0.388056
+                                                         2.273943       1.242867
+                                                         0.705531       0.224873
+                                                         0.271151       0.053850
+                                                         0.092761       0.010861
+                                                         0.030615       0.001026
+
+                          1       9    5dx2              2.487480      -0.368208
+                                                         2.273943      -0.760842
+                                                         0.705531      -0.337858
+                                                         0.271151      -0.073890
+                                                         0.092761       0.004781
+                                                         0.030615       0.002322
+                          1       9    5dxy              2.487480      -0.637755
+                                                         2.273943      -1.317817
+                                                         0.705531      -0.585187
+                                                         0.271151      -0.127981
+                                                         0.092761       0.008282
+                                                         0.030615       0.004022
+                          1       9    5dxz              2.487480      -0.637755
+                                                         2.273943      -1.317817
+                                                         0.705531      -0.585187
+                                                         0.271151      -0.127981
+                                                         0.092761       0.008282
+                                                         0.030615       0.004022
+                          1       9    5dy2              2.487480      -0.368208
+                                                         2.273943      -0.760842
+                                                         0.705531      -0.337858
+                                                         0.271151      -0.073890
+                                                         0.092761       0.004781
+                                                         0.030615       0.002322
+                          1       9    5dyz              2.487480      -0.637755
+                                                         2.273943      -1.317817
+                                                         0.705531      -0.585187
+                                                         0.271151      -0.127981
+                                                         0.092761       0.008282
+                                                         0.030615       0.004022
+                          1       9    5dz2              2.487480      -0.368208
+                                                         2.273943      -0.760842
+                                                         0.705531      -0.337858
+                                                         0.271151      -0.073890
+                                                         0.092761       0.004781
+                                                         0.030615       0.002322
+
+       Atomic covalent radius [Angstrom]:                                  2.030
+
+       Atomic van der Waals radius [Angstrom]:                             2.750
+
+     GTH Potential information for                                    GTH-PBE-q9
+
+       Description:                       Goedecker-Teter-Hutter pseudopotential
+                                           Goedecker et al., PRB 54, 1703 (1996)
+                                          Hartwigsen et al., PRB 58, 3641 (1998)
+                                                      Krack, TCA 114, 145 (2005)
+
+       Gaussian exponent of the core charge distribution:               3.125000
+       Electronic configuration (s p d ...):                               3   6
+
+       Parameters of the local part of the GTH pseudopotential:
+
+                          rloc        C1          C2          C3          C4
+                        0.400000   -3.363552   -1.086530
+
+       Parameters of the non-local part of the GTH (SOC) pseudopotential:
+
+                   l      r(l)      h(i,j,l)
+                                    k(i,j,l)
+                   0    0.305318   17.850623   -5.622649
+                                   -5.622649    7.258808
+                   1    0.316484    7.333780   -2.460945
+                                   -2.460945    2.911829
+                                    0.089367   -0.069860
+                                   -0.069860    0.082660
+
+
+ MOLECULE KIND INFORMATION
+
+
+ All atoms are their own molecule, skipping detailed information
+
+
+ TOTAL NUMBERS AND MAXIMUM NUMBERS
+
+  Total number of            - Atomic kinds:                                   1
+                             - Atoms:                                          2
+                             - Shell sets:                                     2
+                             - Shells:                                        18
+                             - Primitive Cartesian functions:                 12
+                             - Cartesian basis functions:                     50
+                             - Spherical basis functions:                     46
+
+  Maximum angular momentum of- Orbital basis functions:                        2
+                             - Local part of the GTH pseudopotential:          2
+                             - Non-local part of the GTH pseudopotential:      3
+
+
+ MODULE QUICKSTEP: ATOMIC COORDINATES IN ANGSTROM
+
+   Atom Kind Element         X             Y             Z       Z(eff)     Mass
+      1    1 K    19      0.000000      0.000000      0.000000   9.0000  39.0983
+      2    1 K    19      2.642945      2.642945      2.642945   9.0000  39.0983
+
+
+
+ SCF PARAMETERS         Density guess:                                    ATOMIC
+                        --------------------------------------------------------
+                        max_scf:                                             500
+                        max_scf_history:                                       0
+                        max_diis:                                              4
+                        --------------------------------------------------------
+                        eps_scf:                                        1.00E-09
+                        eps_scf_history:                                0.00E+00
+                        eps_diis:                                       1.00E-01
+                        eps_eigval:                                     1.00E-05
+                        --------------------------------------------------------
+                        level_shift [a.u.]:                             0.000000
+                        added MOs                                        37    0
+                        --------------------------------------------------------
+                        Mixing method:                            BROYDEN_MIXING
+                                                charge density mixing in g-space
+                        --------------------------------------------------------
+                        Smear method:                                FERMI_DIRAC
+                        Electronic temperature [K]:                        300.0
+                        Electronic temperature [a.u.]:                  9.50E-04
+                        Accuracy threshold:                             1.00E-10
+                        --------------------------------------------------------
+                        No outer SCF
+
+ PW_GRID| Information for grid number                                          1
+ PW_GRID| Grid distributed over                                     8 processors
+ PW_GRID| Real space group dimensions                                     8    1
+ PW_GRID| the grid is blocked:                                                NO
+ PW_GRID| Cutoff [a.u.]                                                    500.0
+ PW_GRID| spherical cutoff:                                                   NO
+ PW_GRID|   Bounds   1            -54      53                Points:         108
+ PW_GRID|   Bounds   2            -54      53                Points:         108
+ PW_GRID|   Bounds   3            -54      53                Points:         108
+ PW_GRID| Volume element (a.u.^3)  0.7912E-03     Volume (a.u.^3)       996.6690
+ PW_GRID| Grid span                                                    FULLSPACE
+ PW_GRID|   Distribution                         Average         Max         Min
+ PW_GRID|   G-Vectors                           157464.0      157464      157464
+ PW_GRID|   G-Rays                                1458.0        1458        1458
+ PW_GRID|   Real Space Points                   157464.0      163296      151632
+
+ PW_GRID| Information for grid number                                          2
+ PW_GRID| Number of the reference grid                                         1
+ PW_GRID| Grid distributed over                                     8 processors
+ PW_GRID| Real space group dimensions                                     8    1
+ PW_GRID| the grid is blocked:                                                NO
+ PW_GRID| Cutoff [a.u.]                                                    166.7
+ PW_GRID| spherical cutoff:                                                   NO
+ PW_GRID|   Bounds   1            -30      29                Points:          60
+ PW_GRID|   Bounds   2            -30      29                Points:          60
+ PW_GRID|   Bounds   3            -30      29                Points:          60
+ PW_GRID| Volume element (a.u.^3)  0.4614E-02     Volume (a.u.^3)       996.6690
+ PW_GRID| Grid span                                                    FULLSPACE
+ PW_GRID|   Distribution                         Average         Max         Min
+ PW_GRID|   G-Vectors                            27000.0       27120       26940
+ PW_GRID|   G-Rays                                 450.0         452         449
+ PW_GRID|   Real Space Points                    27000.0       28800       25200
+
+ PW_GRID| Information for grid number                                          3
+ PW_GRID| Number of the reference grid                                         1
+ PW_GRID| Grid distributed over                                     8 processors
+ PW_GRID| Real space group dimensions                                     8    1
+ PW_GRID| the grid is blocked:                                                NO
+ PW_GRID| Cutoff [a.u.]                                                     55.6
+ PW_GRID| spherical cutoff:                                                   NO
+ PW_GRID|   Bounds   1            -18      17                Points:          36
+ PW_GRID|   Bounds   2            -18      17                Points:          36
+ PW_GRID|   Bounds   3            -18      17                Points:          36
+ PW_GRID| Volume element (a.u.^3)  0.2136E-01     Volume (a.u.^3)       996.6690
+ PW_GRID| Grid span                                                    FULLSPACE
+ PW_GRID|   Distribution                         Average         Max         Min
+ PW_GRID|   G-Vectors                             5832.0        5904        5796
+ PW_GRID|   G-Rays                                 162.0         164         161
+ PW_GRID|   Real Space Points                     5832.0        6480        5184
+
+ PW_GRID| Information for grid number                                          4
+ PW_GRID| Number of the reference grid                                         1
+ PW_GRID| Grid distributed over                                     8 processors
+ PW_GRID| Real space group dimensions                                     8    1
+ PW_GRID| the grid is blocked:                                                NO
+ PW_GRID| Cutoff [a.u.]                                                     18.5
+ PW_GRID| spherical cutoff:                                                   NO
+ PW_GRID|   Bounds   1            -10       9                Points:          20
+ PW_GRID|   Bounds   2            -10       9                Points:          20
+ PW_GRID|   Bounds   3            -10       9                Points:          20
+ PW_GRID| Volume element (a.u.^3)  0.1246         Volume (a.u.^3)       996.6690
+ PW_GRID| Grid span                                                    FULLSPACE
+ PW_GRID|   Distribution                         Average         Max         Min
+ PW_GRID|   G-Vectors                             1000.0        1040         980
+ PW_GRID|   G-Rays                                  50.0          52          49
+ PW_GRID|   Real Space Points                     1000.0        1200         800
+
+ POISSON| Solver                                                        PERIODIC
+ POISSON| Periodicity                                                        XYZ
+
+ RS_GRID| Information for grid number                                          1
+ RS_GRID|   Bounds   1            -54      53                Points:         108
+ RS_GRID|   Bounds   2            -54      53                Points:         108
+ RS_GRID|   Bounds   3            -54      53                Points:         108
+ RS_GRID| Real space fully replicated
+ RS_GRID| Group size                                                           1
+
+ RS_GRID| Information for grid number                                          2
+ RS_GRID|   Bounds   1            -30      29                Points:          60
+ RS_GRID|   Bounds   2            -30      29                Points:          60
+ RS_GRID|   Bounds   3            -30      29                Points:          60
+ RS_GRID| Real space fully replicated
+ RS_GRID| Group size                                                           1
+
+ RS_GRID| Information for grid number                                          3
+ RS_GRID|   Bounds   1            -18      17                Points:          36
+ RS_GRID|   Bounds   2            -18      17                Points:          36
+ RS_GRID|   Bounds   3            -18      17                Points:          36
+ RS_GRID| Real space fully replicated
+ RS_GRID| Group size                                                           1
+
+ RS_GRID| Information for grid number                                          4
+ RS_GRID|   Bounds   1            -10       9                Points:          20
+ RS_GRID|   Bounds   2            -10       9                Points:          20
+ RS_GRID|   Bounds   3            -10       9                Points:          20
+ RS_GRID| Real space fully replicated
+ RS_GRID| Group size                                                           1
+
+ Number of electrons:                                                         18
+ Number of occupied orbitals:                                                  9
+ Number of molecular orbitals:                                                46
+
+ Number of orbital functions:                                                 46
+ Number of independent orbital functions:                                     46
+
+ Extrapolation method: initial_guess
+
+ Atomic guess: The first density matrix is obtained in terms of atomic orbitals
+               and electronic configurations assigned to each atomic kind
+
+ Guess for atomic kind: K
+
+ Electronic structure
+    Total number of core electrons                                         10.00
+    Total number of valence electrons                                       9.00
+    Total number of electrons                                              19.00
+    Multiplicity                                                   not specified
+    S   [  2.00  2.00] 2.00  1.00
+    P   [  6.00] 6.00
+
+
+ *******************************************************************************
+                  Iteration          Convergence                     Energy [au]
+ *******************************************************************************
+                          1        0.172958                     -28.062015284989
+                          2        0.965888E-01                 -28.065919295777
+                          3        0.204319E-02                 -28.068256419026
+                          4        0.168589E-04                 -28.068257728157
+                          5        0.682732E-06                 -28.068257728224
+
+ Energy components [Hartree]           Total Energy ::          -28.068257728224
+                                        Band Energy ::           -6.706318938904
+                                     Kinetic Energy ::           10.271596648347
+                                   Potential Energy ::          -38.339854376572
+                                      Virial (-V/T) ::            3.732609027511
+                                        Core Energy ::          -46.571765304694
+                                          XC Energy ::           -4.142843642992
+                                     Coulomb Energy ::           22.646351219462
+                       Total Pseudopotential Energy ::          -56.882991868644
+                       Local Pseudopotential Energy ::          -62.762637031378
+                    Nonlocal Pseudopotential Energy ::            5.879645162734
+                                        Confinement ::            0.396299156019
+
+ Orbital energies  State     L     Occupation   Energy[a.u.]          Energy[eV]
+
+                       1     0          2.000      -1.292083          -35.159376
+                       2     0          1.000      -0.060320           -1.641378
+
+                       1     1          6.000      -0.676972          -18.421348
+
+
+ Total Electron Density at R=0:                                         0.002073
+ Re-scaling the density matrix to get the right number of electrons
+                  # Electrons              Trace(P)               Scaling factor
+                           18                18.000                        1.000
+
+
+ SCF WAVEFUNCTION OPTIMIZATION
+
+  Step     Update method      Time    Convergence         Total energy    Change
+  ------------------------------------------------------------------------------
+     1 NoMix/Diag. 0.10E+00    6.6     0.38176579       -56.5382962213 -5.65E+01
+     2 Broy./Diag. 0.10E+00    6.8     0.00036770       -56.5336923041  4.60E-03
+     3 Broy./Diag. 0.10E+00    6.8     0.00661000       -56.5163959653  1.73E-02
+     4 Broy./Diag. 0.10E+00    6.8     0.00037100       -56.5281141588 -1.17E-02
+     5 Broy./Diag. 0.10E+00    6.7     0.00275960       -56.5434131965 -1.53E-02
+     6 Broy./Diag. 0.10E+00    6.8     0.00022483       -56.5292693500  1.41E-02
+     7 Broy./Diag. 0.10E+00    6.8     0.00137927       -56.5167738327  1.25E-02
+     8 Broy./Diag. 0.10E+00    6.8     0.00002201       -56.5093524589  7.42E-03
+     9 Broy./Diag. 0.10E+00    6.8     0.00023397       -56.5099554086 -6.03E-04
+    10 Broy./Diag. 0.10E+00    6.8     0.00000566       -56.5097219807  2.33E-04
+    11 Broy./Diag. 0.10E+00    6.8     0.00003448       -56.5100580423 -3.36E-04
+    12 Broy./Diag. 0.10E+00    6.8     0.00000074       -56.5100762762 -1.82E-05
+    13 Broy./Diag. 0.10E+00    6.8     0.00000960       -56.5099652086  1.11E-04
+    14 Broy./Diag. 0.10E+00    6.8     0.00000012       -56.5099125099  5.27E-05
+    15 Broy./Diag. 0.10E+00    6.8     0.00000041       -56.5099233414 -1.08E-05
+    16 Broy./Diag. 0.10E+00    6.8     0.00000032       -56.5099276912 -4.35E-06
+    17 Broy./Diag. 0.10E+00    6.8     0.00000021       -56.5099282873 -5.96E-07
+    18 Broy./Diag. 0.10E+00    6.8     0.00000006       -56.5099299296 -1.64E-06
+    19 Broy./Diag. 0.10E+00    6.8     0.00000018       -56.5099315613 -1.63E-06
+    20 Broy./Diag. 0.10E+00    6.8     0.00000003       -56.5099317701 -2.09E-07
+    21 Broy./Diag. 0.10E+00    6.8     0.00000010       -56.5099308802  8.90E-07
+    22 Broy./Diag. 0.10E+00    6.8     8.1305E-10       -56.5099303443  5.36E-07
+
+  *** SCF run converged in    22 steps ***
+
+
+  Electronic density on regular grids:        -18.0000000000       -0.0000000000
+  Core density on regular grids:               18.0000000000       -0.0000000000
+  Total charge density on r-space grids:       -0.0000000000
+  Total charge density g-space grids:          -0.0000000000
+
+  Overlap energy of the core charge distribution:               0.00000000000000
+  Self energy of the core charge distribution:               -114.24839066842065
+  Core Hamiltonian energy:                                     26.94508615934550
+  Hartree energy:                                              39.36994952998171
+  Exchange-correlation energy:                                 -8.57638792283178
+  Electronic entropic energy:                                  -0.00018744240498
+  Fermi energy:                                                 0.04855409618229
+
+  Total energy:                                               -56.50993034433028
+
+ !-----------------------------------------------------------------------------!
+                     Mulliken Population Analysis
+
+ #  Atom  Element  Kind  Atomic population                           Net charge
+       1     K        1          9.000000                             -0.000000
+       2     K        1          9.000000                             -0.000000
+ # Total charge                             18.000000                 -0.000000
+
+ !-----------------------------------------------------------------------------!
+
+ !-----------------------------------------------------------------------------!
+                           Hirshfeld Charges
+
+  #Atom  Element  Kind  Ref Charge     Population                    Net charge
+      1       K      1       9.000          9.000                        -0.000
+      2       K      1       9.000          9.000                        -0.000
+
+  Total Charge                                                           -0.000
+ !-----------------------------------------------------------------------------!
+
+ KPOINTS| Band Structure Calculation
+ KPOINTS| Number of k-point sets                                               1
+ KPOINTS| Number of added MOs/bands                                           -1
+ KPOINTS| Number of k-points in set    1                                     148
+ KPOINTS| In units of b-vector [2pi/Bohr]
+ KPOINTS| Special point     1 not specifi     0.000000     0.000000     0.000000
+ KPOINTS| Special point     2 not specifi     0.500000    -0.500000     0.500000
+ KPOINTS| Special point     3 not specifi     0.000000     0.000000     0.500000
+ KPOINTS| Special point     4 not specifi     0.000000     0.000000     0.000000
+ KPOINTS| Time for k-point line                                            2.597
+
+ ENERGY| Total FORCE_EVAL ( QS ) energy [hartree]            -56.509930344330279
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                DBCSR STATISTICS                             -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ COUNTER                                    TOTAL       BLAS       SMM       ACC
+ flops inhomo. stacks                           0       0.0%      0.0%      0.0%
+ flops total                         0.000000E+00       0.0%      0.0%      0.0%
+ flops max/rank                      0.000000E+00       0.0%      0.0%      0.0%
+ matmuls inhomo. stacks                         0       0.0%      0.0%      0.0%
+ matmuls total                                  0       0.0%      0.0%      0.0%
+ number of processed stacks                     0       0.0%      0.0%      0.0%
+ average stack size                                     0.0       0.0       0.0
+ marketing flops                     0.000000E+00
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                      DBCSR MESSAGE PASSING PERFORMANCE                      -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ ROUTINE             CALLS      AVE VOLUME [Bytes]
+ MP_Bcast                1                     12.
+ MP_Allreduce           19                     21.
+ MP_Alltoall        510840                   3508.
+ -------------------------------------------------------------------------------
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                DBM STATISTICS                               -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+    M  x    N  x    K                                          COUNT     PERCENT
+ -------------------------------------------------------------------------------
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                GRID STATISTICS                              -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ LP    KERNEL             BACKEND                              COUNT     PERCENT
+ 4     collocate ortho    CPU                                 303968      51.11%
+ 4     integrate ortho    CPU                                 290752      48.89%
+ 0     collocate general  CPU                                      4       0.00%
+ 0     integrate general  CPU                                      2       0.00%
+ -------------------------------------------------------------------------------
+
+ MEMORY| Estimated peak process memory [MiB]                                 560
+
+ -------------------------------------------------------------------------------
+ ----                             MULTIGRID INFO                            ----
+ -------------------------------------------------------------------------------
+ count for grid        1:          10376          cutoff [a.u.]          500.00
+ count for grid        2:          48958          cutoff [a.u.]          166.67
+ count for grid        3:          21246          cutoff [a.u.]           55.56
+ count for grid        4:          34860          cutoff [a.u.]           18.52
+ total gridlevel count  :         115440
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                         MESSAGE PASSING PERFORMANCE                         -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+
+ ROUTINE             CALLS      AVE VOLUME [Bytes]
+ MP_Group                6
+ MP_Bcast           207397                  20889.
+ MP_Allreduce       108141                     30.
+ MP_Sync                 4
+ MP_Alltoall           401                7061659.
+ MP_SendRecv           658                 418846.
+ MP_ISendRecv          623                 409741.
+ MP_Wait            142531
+ MP_comm_split           4
+ MP_ISend           151244                    521.
+ MP_IRecv           241280                    320.
+ -------------------------------------------------------------------------------
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                           R E F E R E N C E S                               -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ 
+ CP2K version 2025.1 (Development Version), the CP2K developers group (2025).
+ CP2K is freely available from https://www.cp2k.org/ .
+ 
+ T. D. Kuehne, M. Iannuzzi, M. Del Ben, V. V. Rybkin, P. Seewald, F. Stein, T. 
+ Laino, R. Z. Khaliullin, O. Schuett, F. Schiffmann, D. Golze, J. Wilhelm, S. 
+ Chulkov, M. H. Bani-Hashemian, V. Weber, U. Borstnik, M. Taillefumier, A. S. 
+ Jakobovits, A. Lazzaro, H. Pabst, T. Mueller, R. Schade, M. Guidon, S. 
+ Andermatt, N. Holmberg, G. K. Schenter, A. Hehn, A. Bussy, F. Belleflamme, G. 
+ Tabacchi, A. Gloess, M. Lass, I. Bethune, C. J. Mundy, C. Plessl, M. Watkins, 
+ J. VandeVondele, M. Krack, J. Hutter.
+ J. Chem. Phys. 152, 194103 (2020).
+ CP2K: An electronic structure and molecular dynamics software package - 
+ Quickstep: Efficient and accurate electronic structure calculations.
+ https://doi.org/10.1063/5.0007045
+
+ O. Schuett, P. Messmer, J. Hutter, J. VandeVondele.
+ Electronic Structure Calculations on Graphics Processing Units, 173-190 (2016).
+ GPU-Accelerated Sparse Matrix-Matrix Multiplication for Linear Scaling Density 
+ Functional Theory.
+ https://doi.org/10.1002/9781118670712.ch8
+
+ J. Hutter, M. Iannuzzi, F. Schiffmann, J. VandeVondele.
+ WIREs Comput Mol Sci. 4, 15-25 (2014).
+ CP2K: atomistic simulations of condensed matter systems.
+ https://doi.org/10.1002/wcms.1159
+
+ U. Borstnik, J. VandeVondele, V. Weber, J. Hutter.
+ Parallel Comput. 40, 47-58 (2014).
+ Sparse matrix multiplication: The distributed block-compressed sparse row 
+ library.
+ https://doi.org/10.1016/j.parco.2014.03.012
+
+ J. VandeVondele, J. Hutter.
+ J. Chem. Phys. 127, 114105 (2007).
+ Gaussian basis sets for accurate calculations on molecular systems in gas and 
+ condensed phases.
+ https://doi.org/10.1063/1.2770708
+
+ J. VandeVondele, M. Krack, F. Mohamed, M. Parrinello, T. Chassaing, J. Hutter.
+ Comput. Phys. Commun. 167, 103-128 (2005).
+ QUICKSTEP: Fast and accurate density functional calculations using a mixed 
+ Gaussian and plane waves approach.
+ https://doi.org/10.1016/j.cpc.2004.12.014
+
+ M. Krack.
+ Theor. Chem. Acc. 114, 145-152 (2005).
+ Pseudopotentials for H to Kr optimized for gradient-corrected 
+ exchange-correlation functionals.
+ https://doi.org/10.1007/s00214-005-0655-y
+
+ M. Frigo, S. G. Johnson.
+ Proc. IEEE 93, 216-231 (2005).
+ The design and implementation of FFTW3.
+ https://doi.org/10.1109/JPROC.2004.840301
+
+ C. Hartwigsen, S. Goedecker, J. Hutter.
+ Phys. Rev. B 58, 3641-3662 (1998).
+ Relativistic separable dual-space Gaussian pseudopotentials from H to Rn.
+ https://doi.org/10.1103/PhysRevB.58.3641
+
+ G. Lippert, J. Hutter, M. Parrinello.
+ Mol. Phys. 92, 477-487 (1997).
+ A hybrid Gaussian and plane wave density functional scheme.
+ https://doi.org/10.1080/002689797170220
+
+ S. Goedecker, M. Teter, J. Hutter.
+ Phys. Rev. B 54, 1703-1710 (1996).
+ Separable dual-space Gaussian pseudopotentials.
+ https://doi.org/10.1103/PhysRevB.54.1703
+
+ J. P. Perdew, K. Burke, M. Ernzerhof.
+ Phys. Rev. Lett. 77, 3865-3868 (1996).
+ Generalized gradient approximation made simple.
+ https://doi.org/10.1103/PhysRevLett.77.3865
+
+
+ -------------------------------------------------------------------------------
+ -                                                                             -
+ -                                T I M I N G                                  -
+ -                                                                             -
+ -------------------------------------------------------------------------------
+ SUBROUTINE                       CALLS  ASD         SELF TIME        TOTAL TIME
+                                MAXIMUM       AVERAGE  MAXIMUM  AVERAGE  MAXIMUM
+ CP2K                                 1  1.0    0.039    0.048  157.676  157.677
+ qs_energies                          1  2.0    0.008    0.024  156.459  156.469
+ scf_env_do_scf                       1  3.0    0.000    0.000  151.613  151.613
+ scf_env_do_scf_inner_loop           22  4.0    0.032    0.034  151.613  151.613
+ do_general_diag_kp                  23  5.9    0.123    0.141  142.318  143.560
+ qs_scf_new_mos_kp                   22  5.0    0.000    0.000  139.764  140.994
+ mp_alltoall_i22                  87116  8.7  101.154  124.369  101.154  124.369
+ dbcsr_desymmetrize_deep          49486  7.4    0.726    0.823   74.730   90.922
+ rskp_transform                   11560  6.9   14.684   79.047   14.684   79.047
+ dbcsr_complete_redistribute      37630  8.2    1.184    1.373   40.702   47.717
+ kpoint_density_transform            22  7.0    0.061    0.070   41.018   41.137
+ copy_fm_to_dbcsr                 11264  8.0    0.065    0.073   32.932   39.794
+ transform_dmat                    5632  8.0    6.875   36.873    6.875   36.873
+ copy_dbcsr_to_fm                 26366  6.8    0.255    0.282   12.527   12.713
+ qs_ks_update_qs_env                 22  5.0    0.000    0.000    3.731    9.158
+ rebuild_ks_matrix                   22  6.0    0.000    0.000    2.721    8.149
+ qs_ks_build_kohn_sham_matrix        22  7.0    0.059    0.061    2.721    8.149
+ sum_up_and_integrate                22  8.0    0.000    0.000    1.594    7.003
+ integrate_v_rspace                  22  9.0    0.024    0.121    1.592    7.002
+ grid_integrate_task_list            22 10.0    1.235    6.565    1.235    6.565
+ transfer_rs2pw                      94  8.0    0.001    0.002    3.995    4.861
+ transfer_rs2pw_500                  25  8.9    0.110    0.123    3.930    4.799
+ mp_sendrecv_dv                     658 10.0    3.861    4.732    3.861    4.732
+ qs_rho_update_rho_low               23  5.0    0.000    0.000    4.438    4.458
+ calculate_rho_elec                  23  6.0    0.029    0.042    4.438    4.458
+ density_rs2pw                       23  7.0    0.001    0.001    3.476    4.196
+ grid_collocate_task_list            23  7.0    0.928    3.903    0.928    3.903
+ dbcsr_finalize                  113352  8.1    0.428    0.457    3.002    3.159
+ cp_fm_start_copy_general         34384  7.3    0.461    0.689    2.829    2.890
+ mp_alltoall_d11v                261348  9.3    2.449    2.610    2.449    2.610
+ write_kpoints_restart               22  5.0    0.012    0.016    2.360    2.360
+ mp_cart_sub                      52734  8.8    2.168    2.187    2.168    2.187
+ dbcsr_merge_all                  37630 10.2    1.019    1.160    1.720    1.870
+ hybrid_alltoall_any              49486  8.4    0.195    0.207    1.602    1.712
+ mp_alltoall_i11v                162376  8.9    1.505    1.534    1.505    1.534
+ cp_dbcsr_alloc_block_from_nbl    11495  5.0    0.288    1.409    0.319    1.519
+ dbcsr_dot                        71413  8.0    0.301    0.439    1.298    1.379
+ mp_allgather_i                   68768  8.3    1.158    1.252    1.158    1.252
+ mp_cart_create                   26373  8.8    1.201    1.238    1.201    1.238
+ qs_energies_init_hamiltonians        1  3.0    0.000    0.000    1.192    1.192
+ mp_sum_d                         72007  9.0    0.999    1.163    0.999    1.163
+ evaluate_core_matrix_traces         22  6.0    0.000    0.000    1.009    1.009
+ calculate_ptrace_kp                 44  7.0    0.053    0.055    1.009    1.009
+ create_qs_kind_set                   1  2.0    0.000    0.000    1.007    1.007
+ read_qs_kind                         1  3.0    0.614    0.620    1.007    1.007
+ cp_cfm_geeig_canon                 741  6.9    0.005    0.005    0.981    0.998
+ fft_wrap_pw1pw2                    401 10.0    0.004    0.005    0.945    0.962
+ mp_bcast_iv                     137690  8.3    0.821    0.932    0.821    0.932
+ cp_cfm_heevd                      1482  7.9    0.001    0.002    0.906    0.923
+ cp_cfm_heevd_base                 1482  8.9    0.905    0.921    0.905    0.921
+ build_core_hamiltonian_matrix        1  4.0    0.006    0.006    0.240    0.903
+ fft_wrap_pw1pw2_500                266 11.3    0.072    0.073    0.882    0.899
+ dbcsr_create_new                207677  7.9    0.701    0.730    0.845    0.886
+ qs_env_update_s_mstruct              1  4.0    0.000    0.000    0.749    0.870
+ dbcsr_work_create                87116  8.7    0.507    0.526    0.817    0.870
+ cp_fm_write_unformatted           3246  6.0    0.638    0.839    0.645    0.868
+ calculate_rho_core                   1  5.0    0.001    0.002    0.688    0.848
+ dbcsr_copy                       84299  6.8    0.412    0.450    0.692    0.834
+ fft3d_ps                           401 12.0    0.315    0.326    0.751    0.766
+ dbcsr_iterator_start            346380  8.8    0.620    0.630    0.711    0.725
+ self_consistency_check              22  5.0    0.051    0.053    0.676    0.703
+ qs_vxc_create                       22  8.0    0.000    0.000    0.668    0.669
+ xc_vxc_pw_create                    22  9.0    0.027    0.028    0.667    0.668
+ init_scf_run                         1  3.0    0.000    0.000    0.584    0.664
+ scf_env_initial_rho_setup            1  4.0    0.000    0.000    0.584    0.664
+ dbcsr_work_destroy_all           87116  9.7    0.412    0.419    0.621    0.638
+ cp_sm_mix                        35706  6.0    0.098    0.178    0.573    0.608
+ dbcsr_data_new                  950208  9.6    0.544    0.601    0.544    0.601
+ tree_to_linear_d                 37630 11.2    0.556    0.580    0.556    0.580
+ copy_dbcsr_to_fm_bc              26366  7.8    0.253    0.272    0.561    0.576
+ gspace_mixing                       21  5.0    0.024    0.024    0.545    0.545
+ copy_fm_to_dbcsr_bc              11264  9.0    0.141    0.150    0.487    0.512
+ dbcsr_data_release             1395560 10.0    0.470    0.490    0.470    0.490
+ dbcsr_iterator_stop             346380  8.8    0.399    0.401    0.472    0.476
+ mixing_allocate                      1  3.0    0.009    0.010    0.114    0.456
+ parser_read_line                134412  4.0    0.044    0.046    0.447    0.450
+ broyden_mixing                      21  6.0    0.432    0.439    0.445    0.448
+ mp_max_d                         35708  7.0    0.389    0.444    0.389    0.444
+ dbcsr_destroy                   136265  7.8    0.218    0.237    0.395    0.435
+ xc_pw_derive                       132 11.0    0.001    0.001    0.424    0.433
+ calculate_first_density_matrix       1  5.0    0.001    0.001    0.349    0.430
+ calculate_atomic_block_dm            1  6.0    0.001    0.001    0.346    0.427
+ parser_read_line_low               153  5.2    0.048    0.202    0.403    0.408
+ kpoint_set_mo_occupation            22  7.0    0.367    0.369    0.383    0.392
+ mp_alltoall_z22v                   401 14.0    0.381    0.390    0.381    0.390
+ broadcast_input_information        153  6.2    0.098    0.101    0.356    0.383
+ xc_rho_set_and_dset_create          22 10.0    0.017    0.022    0.361    0.370
+ potential_pw2rs                     22 10.0    0.002    0.002    0.334    0.357
+ mp_waitall_1                    142531  8.3    0.173    0.305    0.173    0.305
+ mp_bcast_im                      68768  8.3    0.251    0.287    0.251    0.287
+ xc_pw_divergence                    22 10.0    0.000    0.000    0.274    0.281
+ quick_finalize                   49486  9.4    0.123    0.156    0.204    0.271
+ dbcsr_copy_into_existing         12887  9.5    0.094    0.197    0.165    0.270
+ dbcsr_set                       141989  7.4    0.125    0.131    0.186    0.266
+ x_to_yz                            220 13.2    0.032    0.033    0.234    0.246
+ build_overlap_matrix_low             1  5.0    0.013    0.022    0.063    0.241
+ build_kinetic_matrix_low             1  5.0    0.012    0.021    0.062    0.240
+ calculate_ecore_overlap              1  4.0    0.000    0.000    0.188    0.234
+ qs_env_rebuild_rho                   1  5.0    0.000    0.000    0.057    0.227
+ qs_rho_rebuild                       1  6.0    0.004    0.005    0.057    0.227
+ transfer_pw2rs                      89 11.0    0.001    0.001    0.226    0.226
+ mp_sum_iv                           24  5.3    0.171    0.211    0.171    0.211
+ qs_scf_ensure_work_matrices          1  3.0    0.000    0.000    0.171    0.211
+ yz_to_x                            181 12.8    0.020    0.021    0.198    0.210
+ mp_comm_free                     79143  8.8    0.183    0.204    0.183    0.204
+ transfer_pw2rs_500                  23 11.8    0.090    0.094    0.173    0.178
+ mp_bcast_i_src                     612  7.2    0.147    0.175    0.147    0.175
+ dbcsr_reserve_blocks             22759  8.5    0.072    0.150    0.085    0.170
+ cp_fm_finish_copy_general        14228  7.8    0.114    0.131    0.132    0.158
+ dbcsr_zero                      141989  8.4    0.061    0.137    0.061    0.137
+ scf_post_calculation_gpw             1  3.0    0.000    0.000    0.130    0.130
+ write_available_results              1  4.0    0.000    0.000    0.130    0.130
+ write_mo_free_results                1  5.0    0.002    0.002    0.130    0.130
+ xc_functional_eval                  22 11.0    0.000    0.000    0.121    0.128
+ pbe_lda_eval                        22 12.0    0.121    0.127    0.121    0.127
+ kpoint_density_matrices             22  7.0    0.009    0.009    0.118    0.123
+ build_core_ppnl                      1  5.0    0.026    0.114    0.026    0.114
+ dbcsr_iterator_seek             346380  9.8    0.092    0.113    0.092    0.113
+ mp_bcast_am_src                    153  7.2    0.097    0.103    0.108    0.112
+ parallel_gemm_fm                  2816  8.0    0.003    0.003    0.107    0.112
+ parallel_gemm_fm_gemm             2816  9.0    0.003    0.003    0.104    0.109
+ cp_fm_gemm                        2816 10.0    0.102    0.106    0.102    0.106
+ dbcsr_sort_indices              109875 10.8    0.058    0.105    0.058    0.105
+ dbcsr_make_index_exist          207677  8.9    0.093    0.101    0.093    0.101
+ mp_sum_dv                          317  3.3    0.067    0.087    0.067    0.087
+ dbcsr_reserve_all_blocks         11264 10.0    0.016    0.019    0.074    0.084
+ merge_index                      37630 11.2    0.075    0.082    0.075    0.082
+ mp_irecv_iv                     137536  8.3    0.009    0.068    0.009    0.068
+ hirshfeld_integration                1  6.0    0.015    0.059    0.066    0.066
+ qs_init_subsys                       1  2.0    0.001    0.002    0.066    0.066
+ cp_cfm_gemm                       2223  7.9    0.063    0.065    0.063    0.065
+ pw_scatter_p                       220 12.2    0.063    0.064    0.063    0.064
+ qs_env_setup                         1  3.0    0.000    0.000    0.063    0.064
+ qs_env_rebuild_pw_env                2  3.5    0.000    0.000    0.063    0.063
+ pw_env_rebuild                       1  5.0    0.000    0.001    0.062    0.063
+ topology_control                     1  2.0    0.000    0.000    0.060    0.061
+ mp_isend_dv                      34976  8.2    0.054    0.060    0.054    0.060
+ dbcsr_switch_data_area           49486 10.4    0.045    0.046    0.058    0.060
+ pw_poisson_solve                    22  8.0    0.000    0.000    0.057    0.057
+ mp_isendrecv_dv                    623 13.0    0.020    0.052    0.020    0.052
+ calculate_hirshfeld_normalizat       1  6.0    0.011    0.043    0.051    0.051
+ cp_fm_cleanup_copy_general       24528  7.0    0.030    0.032    0.047    0.051
+ transfer_rs2pw_170                  23  9.0    0.017    0.018    0.045    0.050
+ pw_grid_setup                        4  6.0    0.000    0.000    0.049    0.050
+ pw_grid_setup_internal               4  7.0    0.001    0.002    0.049    0.050
+ mp_isend_iv                      77512  8.3    0.012    0.046    0.012    0.046
+ transfer_pw2rs_170                  22 12.0    0.017    0.017    0.038    0.044
+ build_core_ppl                       1  5.0    0.009    0.042    0.009    0.042
+ read_cell_cif                        2  4.5    0.002    0.005    0.041    0.042
+ fft_wrap_pw1pw2_170                 45 10.5    0.003    0.003    0.039    0.041
+ pw_integral_ab_c1d_c1d_gs           22  9.0    0.035    0.036    0.037    0.037
+ dbcsr_data_copy_aa2              37630 10.9    0.021    0.037    0.021    0.037
+ coordinate_control                   1  3.0    0.001    0.001    0.036    0.036
+ coordinate_control_READ_COORDI       1  4.0    0.000    0.000    0.036    0.036
+ read_coordinate_cif                  1  5.0    0.002    0.002    0.036    0.036
+ mp_irecv_im2                     68768  8.3    0.004    0.034    0.004    0.034
+ pw_grid_sort                         4  8.0    0.023    0.023    0.032    0.033
+ dbcsr_distribution_new           37632  8.5    0.026    0.031    0.026    0.031
+ pw_gather_p                        181 11.8    0.030    0.031    0.030    0.031
+ dbcsr_get_data_size_used         87116  9.7    0.028    0.030    0.028    0.030
+ mp_recv_dv                        9738  7.0    0.004    0.029    0.004    0.029
+ mixing_init                          1  5.0    0.026    0.028    0.028    0.028
+ dbcsr_make_dbcsr_index          109875 10.8    0.026    0.027    0.026    0.027
+ mp_sum_dm3                          22  8.0    0.016    0.026    0.016    0.026
+ kpoint_init_cell_index               2  3.5    0.015    0.020    0.023    0.026
+ pw_copy                            330 10.5    0.022    0.024    0.022    0.024
+ qs_create_task_list                  1  5.0    0.000    0.000    0.004    0.022
+ generate_qs_task_list                1  6.0    0.003    0.015    0.004    0.022
+ mp_sum_l                           429  2.1    0.016    0.022    0.016    0.022
+ mp_comm_size                     72279  9.0    0.018    0.022    0.018    0.022
+ mp_isend_im2                     38756  8.3    0.005    0.021    0.005    0.021
+ mp_irecv_dv                      34976  8.2    0.020    0.021    0.020    0.021
+ restraint_control                    1  2.0    0.000    0.000    0.010    0.020
+ mp_sum_i                             4  2.8    0.010    0.020    0.010    0.020
+ pw_derive                          198 11.3    0.017    0.018    0.017    0.018
+ mp_comm_rank                     72279  9.0    0.017    0.018    0.017    0.018
+ pw_copy_from_array                 220 12.2    0.014    0.018    0.014    0.018
+ transfer_rs2pw_60                   23  9.0    0.004    0.004    0.014    0.016
+ -------------------------------------------------------------------------------
+
+ The number of warnings for this run is : 1
+ 
+ -------------------------------------------------------------------------------
+  **** **** ******  **  PROGRAM ENDED AT                 2025-08-04 03:23:54.422
+ ***** ** ***  *** **   PROGRAM RAN ON                              i04r11c03s08
+ **    ****   ******    PROGRAM RAN BY                                   di38fab
+ ***** **    ** ** **   PROGRAM PROCESS ID                               3906374
+  **** **  *******  **  PROGRAM STOPPED IN /hppfs/scratch/04/di38fab/09_GTH/Delt
+                                           a_Set/K/TZV2P-MOLOPT-PBE-GTH/8x8x8
